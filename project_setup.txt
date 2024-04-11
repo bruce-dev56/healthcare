@@ -1,10 +1,10 @@
 # Setup Documentation
 
 ## Clone The Project
-git clone https://github.com/Ujjalzaman/Doctor-Appointment.git
+git clone https://github.com/ligh128/DoctorOnCall-SYS.git
 
 ### Install Frontend
-cd Doctor-Appointment
+cd DoctorOnCall-SYS
 - npm install
 - npm start
 
