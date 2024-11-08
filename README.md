@@ -51,7 +51,7 @@ To begin using the DoctorOnCall System, follow these simple steps:
 # Setup Documentation
 
 ## Clone The Project
-git clone https://github.com/ligh128/DoctorOnCall-SYS.git
+git clone https://github.com/dev-coder-cool/healthcare.git
 
 ### Install Frontend
 cd DoctorOnCall-SYS
@@ -114,13 +114,13 @@ Note: Please note that these are general instructions for setting up an Express 
 - **Prisma**: A modern database toolkit for Node.js and TypeScript, used for database access and management.
 
  ## Project Screenshot
-![DoctorOnCall OverView](https://github.com/ligh128/DoctorOnCall-SYS/public/assets/images/intro.jpg)
+![DoctorOnCall OverView](https://github.com/dev-coder-cool/healthcare/tree/main/public/assets/images/intro.jpg)
 
 ## Contributing:
 
 1. Fork the repository by clicking the "Fork" button on the top right corner of the project's GitHub page. This will create a copy of the project in your own GitHub account.
 
-2. Clone the forked repository to your local machine by running the command ``` git clone https://github.com/your-username/DoctorOnCall-SYS.git ``` in your terminal.
+2. Clone the forked repository to your local machine by running the command ``` git clone https://github.com/dev-coder-cool/healthcare ``` in your terminal.
 
 3. Install the project's dependencies by running npm install or yarn install in the project's root directory.
 Create a new branch for your changes by running the command ``` git checkout -b branch-name ```, where branch-name is a descriptive name for your branch.
@@ -140,8 +140,3 @@ Wait for the project's maintainers to review your pull request and provide feedb
 
 Thank you for considering this project. If you have any questions, please do not hesitate to contact me.
 
-
-## Contact Me
-Telegram: [https://t.me/decentrasys](https://t.me/decentrasys)
-# doctor-on-call
-# doctor-on-call
