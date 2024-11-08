@@ -114,7 +114,7 @@ Note: Please note that these are general instructions for setting up an Express 
 - **Prisma**: A modern database toolkit for Node.js and TypeScript, used for database access and management.
 
  ## Project Screenshot
-![DoctorOnCall OverView](https://github.com/dev-coder-cool/healthcare/tree/main/public/assets/images/intro.jpg)
+![DoctorOnCall OverView](https://github.com/dev-coder-cool/healthcare/blob/main/public/assets/images/intro.jpg)
 
 ## Contributing:
 
