@@ -55,15 +55,15 @@ const Footer = () => {
 								<div className="footer-contact-info">
 									<div className="footer-address">
 										<span><i className="fas fa-map-marker-alt"></i></span>
-										<p> 121, Mirzapure Union office,<br /> Sylhet, Bangladesh 03214 </p>
+										<p> 121, Mirzapure Union office</p>
 									</div>
 									<p>
 										<i className="fas fa-phone-alt"></i>
-										+88 017 51 040425
+										+44 7933 875 691
 									</p>
 									<p className="mb-0">
 										<i className="fas fa-envelope"></i>
-										ligh128@outlook.com
+										brucewene73@gmail.com
 									</p>
 								</div>
 							</div>

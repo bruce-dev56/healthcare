@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  shadowDatabaseUrl = "postgres://postgres:bluesky@localhost:5432/my_shadow_database"
 }
 
 model Auth {
