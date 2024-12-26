@@ -17,6 +17,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const sendVerificationEmail = async (data: Doctor) => {
     const currentUrl = process.env.NODE_ENV === 'production' ? config.backendLiveUrl : config.backendLocalUrl;
+
     const uniqueString = uuidv4() + data.id;
     const uniqueStringHashed = await bcrypt.hashSync(uniqueString, 12);
     const url = `${currentUrl}user/verify/${data.id}/${uniqueString}`
@@ -28,14 +29,16 @@ const sendVerificationEmail = async (data: Doctor) => {
             uniqueString: uniqueStringHashed
         }
     })
+
     if (verficationData) {
         const pathName = path.join(__dirname, '../../../../template/verify.html',)
-        const obj = {link: url};
+        const obj = { link: url };
         const subject = "Email Verification"
         const toMail = data.email;
-        try{
-            await EmailtTransporter({pathName, replacementObj: obj, toMail, subject})
-        }catch(err){
+
+        try {
+            await EmailtTransporter({ pathName, replacementObj: obj, toMail, subject })
+        } catch (err) {
             console.log(err);
             throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Unable to send email !');
         }
@@ -43,29 +46,28 @@ const sendVerificationEmail = async (data: Doctor) => {
 }
 
 const create = async (payload: any): Promise<any> => {
-    const data = await prisma.$transaction(async (tx) => {
-        const { password, ...othersData } = payload;
-        const existEmail = await tx.auth.findUnique({ where: { email: othersData.email } });
-        if (existEmail) {
-            throw new Error("Email Already Exist !!")
-        }
-        const doctor = await tx.doctor.create({ data: othersData });
-        await tx.auth.create({
-            data: {
-                email: doctor.email,
-                password: password && await bcrypt.hashSync(password, 12),
-                role: UserRole.doctor,
-                userId: doctor.id
-            },
+        const data = await prisma.$transaction(async (tx) => {
+            const { password, ...othersData } = payload;
+            // const existEmail = await tx.auth.findUnique({ where: { email: othersData.email } });
+            // if (existEmail) {
+            //     throw new Error("Email Already Exist !!")
+            // }
+            const doctor = await tx.doctor.create({ data: othersData });
+            await tx.auth.create({
+                data: {
+                    email: doctor.email,
+                    password: password && await bcrypt.hashSync(password, 12),
+                    role: UserRole.doctor,
+                    userId: doctor.id
+                },
+            });
+            return doctor
         });
-        return doctor
-    });
-
-    if (data.id) {
-        await sendVerificationEmail(data)
-    }
-    return data;
-
+    
+        if (data.id) {
+            await sendVerificationEmail(data)
+        }
+        return data;
 }
 
 const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise<IGenericResponse<Doctor[]>> => {
