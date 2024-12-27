@@ -8,7 +8,7 @@ import { FaLocationArrow, FaRegThumbsUp, FaDollarSign, FaComment } from "react-i
 import { truncate } from '../../../utils/truncate';
 
 const SearchContent = ({ data }) => {
-    const services = data?.services?.split(',')
+    const services = data.services ? data?.services?.split(',') : [];
     return (
         <div className="mb-4 rounded" style={{ background: '#f3f3f3' }}>
             <div className='d-flex p-3 justify-content-between'>
@@ -65,7 +65,7 @@ const SearchContent = ({ data }) => {
                         <ul>
                             <li><FaRegThumbsUp />  97%</li>
                             <li><FaComment /> 4 Feedback</li>
-                            <li><FaLocationArrow />{truncate(data?.clinicAddress, 20)}</li>
+                            <li><FaLocationArrow /> { data?.clinicAddress ? truncate(data?.clinicAddress, 20) : '' }</li>
                             <li><FaDollarSign /> {data?.price ? truncate(data?.price, 4) : 60} (Per Hour)</li>
                         </ul>
                     </div>

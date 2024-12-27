@@ -48,10 +48,10 @@ const sendVerificationEmail = async (data: Doctor) => {
 const create = async (payload: any): Promise<any> => {
         const data = await prisma.$transaction(async (tx) => {
             const { password, ...othersData } = payload;
-            // const existEmail = await tx.auth.findUnique({ where: { email: othersData.email } });
-            // if (existEmail) {
-            //     throw new Error("Email Already Exist !!")
-            // }
+            const existEmail = await tx.auth.findUnique({ where: { email: othersData.email } });
+            if (existEmail) {
+                throw new Error("Email Already Exist !!")
+            }
             const doctor = await tx.doctor.create({ data: othersData });
             await tx.auth.create({
                 data: {

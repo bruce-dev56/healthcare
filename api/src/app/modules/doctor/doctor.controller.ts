@@ -25,7 +25,7 @@ const getAllDoctors = catchAsync(async (req: Request, res: Response) => {
         message: 'Successfully Retrieve doctors !!',
         success: true,
         data: result,
-    })
+    });
 })
 
 const getDoctor = catchAsync(async (req: Request, res: Response) => {
