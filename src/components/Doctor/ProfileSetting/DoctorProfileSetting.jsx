@@ -46,8 +46,8 @@ const DoctorProfileSetting = () => {
         const formData = new FormData();
         selectedImage && formData.append('file', file);
         const changeData = JSON.stringify(changedValue);
-        formData.append('data', changeData)
-        updateDoctor({ data: formData, id: userId })
+        formData.append('data', changeData);
+        updateDoctor({ data: formData, id: userId });
     };
 
     useEffect(() => {

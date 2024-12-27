@@ -113,6 +113,25 @@ Note: Please note that these are general instructions for setting up an Express 
 - **TypeScript:** A superset of JavaScript that adds static typing, enhancing code quality and maintainability.
 - **Prisma**: A modern database toolkit for Node.js and TypeScript, used for database access and management.
 
+## Steps to Retrieve Cludinary Credential:
+
+1. **Log in Your Cloudianry Account**
+   - Visit [Cloudinary's website](https://cloudinary.com) and log in with your credentials.
+
+2. **Navigate to the Dashboard**  
+   - After logging in, you'll be redirected to your Cloudinary Dashboard.
+
+3. **Locate the `cloud_name`**  
+   - In the Dashboard, find the section labeled **Account Details** or **API Environment Variables**.
+   - Your `cloud_name` will be displayed here, along with your `api_key` and `api_secret`.
+
+### Example:
+
+```
+plaintext
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+```
+
  ## Project Screenshot
 ![DoctorOnCall OverView](https://github.com/dev-coder-cool/healthcare/blob/main/public/assets/images/intro.jpg)
 

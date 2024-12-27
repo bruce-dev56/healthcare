@@ -15,7 +15,7 @@ const uploadFile = async (file: any): Promise<ICloudinaryResponse> => {
     if (!file || !file.buffer) {
         throw new Error('File not Provided or Invalid');
     }
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
             { resource_type: 'auto', folder: 'doctorOnCall' },
             (error: any, result: any) => {
