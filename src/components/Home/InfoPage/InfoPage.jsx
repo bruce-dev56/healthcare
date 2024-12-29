@@ -36,7 +36,7 @@ const InfoPage = () => {
                                     <div className="icon-box mt-4 mt-xl-0">
                                         <FaHeadset className="icon"/>
                                         <h4>Emegency Cases</h4>
-                                        <h6 className='text-secondary'>+44 7933 875 691</h6>
+                                        <h6 className='text-secondary'>+1 951 360 8795</h6>
                                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui facilis perferendis quia maxime. Laborum excepturi pariatur laboriosam nihil, dolor molestias.</p>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaCheck, FaEnvelope, FaLock, FaTimes, FaUser } from 'react-icons/fa';
-import SocialSignUp from './SocialSignUp';
+// import SocialSignUp from './SocialSignUp';
 import Spinner from 'react-bootstrap/Spinner'
 import swal from 'sweetalert';
 import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../redux/api/authApi';
@@ -201,9 +201,6 @@ const SignUp = ({ setSignUp }) => {
                         <span className="ms-2">Password Must Have Number.</span></p>
                 </div>
             </div>
-
-            <p className="social-text">Or Sign up with social account</p>
-            <SocialSignUp />
         </form>
 
     );
