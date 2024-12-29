@@ -25,6 +25,24 @@ const Login = catchAsync(async (req: Request, res: Response) => {
         data: result,
     })
 })
+
+const oauthLogin = catchAsync(async (req: Request, res: Response) => {
+    const result = await AuthService.OauthLoginUser(req.body);
+    const { accessToken } = result;
+
+    const cookieOptions = {
+        secure: config.env === 'production',
+        httpOnly: true
+    }
+    res.cookie('accessToken', accessToken, cookieOptions)
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully Logged !!',
+        success: true,
+        data: result,
+    })
+})
+
 const resetPassword = catchAsync(async (req: Request, res: Response) => {
     const result = await AuthService.resetPassword(req.body);
     sendResponse(res, {
@@ -87,18 +105,19 @@ const VerifyUser = catchAsync(async (req: Request, res: Response) => {
             res.redirect('/api/v1/auth/expired/link');
         }
     }
-})
+});
 
 const Verified = catchAsync(async (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../../../template/verfied.html"))
-})
+});
 
 const VerficationExpired = catchAsync(async (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../../../template/expiredVarification.html"))
-})
+});
 
 export const AuthController = {
     Login,
+    oauthLogin,
     VerifyUser,
     Verified,
     VerficationExpired,

@@ -8,7 +8,12 @@ import config from './config';
 
 const app: Application = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
 app.use(CookieParser());
 
 app.use(express.json());
@@ -22,6 +27,13 @@ app.get('/favicon.ico', (req: Request, res: Response) => {
 app.get('/', (req: Request, res: Response) => {
     res.send(config.clientUrl)
 })
+
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Cross-Origin-Opener-Policy', 'unsafe-none');
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+  next();
+});
 
 app.use('/api/v1', router);
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

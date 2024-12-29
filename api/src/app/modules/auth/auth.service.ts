@@ -5,6 +5,7 @@ import httpStatus from 'http-status';
 import { JwtHelper } from '../../../helpers/jwtHelper';
 import config from '../../../config';
 import { Secret } from 'jsonwebtoken';
+import { OAuth2Client } from "google-auth-library";
 import moment from 'moment';
 import { EmailtTransporter } from '../../../helpers/emailTransporter';
 const { v4: uuidv4 } = require('uuid');
@@ -44,10 +45,52 @@ const loginUser = async (user: any): Promise<ILginResponse> => {
     const accessToken = JwtHelper.createToken(
         { role, userId },
         config.jwt.secret as Secret,
-        config.jwt.JWT_EXPIRES_IN as string
+        config.jwt.JWT_EXPIRES_IN as string 
     )
     return { accessToken, user: { role, userId } }
 }
+
+const OauthLoginUser = async (user: any): Promise<any> => {
+    const idToken = Object.keys(user)[0];
+    const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+    const ticket = await client.verifyIdToken({
+        idToken,
+        audience: process.env.GOOGLE_CLIENT_ID
+    })
+
+    const payload = ticket.getPayload();
+    if (!payload) 
+        throw new Error('Invalid payload from Google ID token');
+
+    const { sub, email, name, email_verified } = payload;
+    const isUserExist = await prisma.auth.findUnique({
+        where: { email }
+    });
+
+    if (!isUserExist) {
+        throw new Error('User is not Exist !')
+    }
+
+    if (isUserExist.role === 'doctor') {
+        const getDoctorInfo = await prisma.doctor.findUnique({
+            where: {
+                email: isUserExist.email
+            }
+        })
+        if (getDoctorInfo && getDoctorInfo?.verified === false) {
+            throw new ApiError(httpStatus.NOT_FOUND, "Please Verify Your Email First !");
+        }
+    }
+    const { role, userId } = isUserExist;
+    const accessToken = JwtHelper.createToken(
+        { role, userId },
+        config.jwt.secret as Secret,
+        config.jwt.JWT_EXPIRES_IN as string
+    );
+
+    return { accessToken, user: { role, userId } };
+}   
 
 const VerificationUser = async (user: any): Promise<ILginResponse> => {
     const { email: IEmail, password } = user;
@@ -176,6 +219,7 @@ const PassworResetConfirm = async (payload: any): Promise<any> => {
 
 export const AuthService = {
     loginUser,
+    OauthLoginUser,
     VerificationUser,
     resetPassword,
     PassworResetConfirm

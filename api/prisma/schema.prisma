@@ -12,7 +12,9 @@ model Auth {
   id       String   @id @default(uuid())
   email    String   @unique
   password String
+  googleId String?  @unique
   userId   String?
+  isOAuth  Boolean  @default(false) 
   role     UserRole
 
   @@map("Auth")
